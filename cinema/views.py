@@ -4,7 +4,10 @@ from rest_framework.response import Response
 from rest_framework import status, mixins, generics, viewsets
 from django.http import Http404
 from .models import Genre, Actor, CinemaHall, Movie
-from .serializers import GenreSerializer, ActorSerializer, CinemaHallSerializer, MovieSerializer
+from .serializers import (GenreSerializer,
+                          ActorSerializer,
+                          CinemaHallSerializer,
+                          MovieSerializer)
 
 
 class GenreList(APIView):
@@ -49,9 +52,12 @@ class GenreDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class ActorList(mixins.ListModelMixin,
-                             mixins.CreateModelMixin,
-                             generics.GenericAPIView):
+class ActorList(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    generics.GenericAPIView
+):
+
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
 
@@ -62,10 +68,13 @@ class ActorList(mixins.ListModelMixin,
         return self.create(request, *args, **kwargs)
 
 
-class ActorDetail(mixins.RetrieveModelMixin,
-                         mixins.UpdateModelMixin,
-                         mixins.DestroyModelMixin,
-                         generics.GenericAPIView):
+class ActorDetail(
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    generics.GenericAPIView
+):
+
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
 

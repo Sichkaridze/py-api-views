@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
@@ -23,7 +22,6 @@ class Movie(models.Model):
     duration = models.IntegerField()
     actors = models.ManyToManyField(Actor, related_name="movies")
     genres = models.ManyToManyField(Genre, related_name="movies")
-
 
     def __str__(self):
         return self.title
